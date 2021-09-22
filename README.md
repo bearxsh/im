@@ -1,2 +1,2 @@
 # im
-即时通讯后台
+An Instant Messaging (IM) Backend Application.
