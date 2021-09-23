@@ -1,4 +1,4 @@
-package com.bearxsh.im.gateway.config;
+package com.bearxsh.im.service.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;

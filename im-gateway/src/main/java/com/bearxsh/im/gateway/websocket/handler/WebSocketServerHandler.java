@@ -47,7 +47,6 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<TextWebS
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame frame) throws Exception {
         String message = frame.text();
         log.info(LocalDateTime.now() + " receive a message: " + message);
-        ctx.writeAndFlush(new TextWebSocketFrame("ok."));
         JSONObject jsonObject = JSON.parseObject(message);
         String type = jsonObject.getString("type");
         switch (type) {
@@ -64,9 +63,10 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<TextWebS
                 handleSendMsg(msg);
                 break;
             default:
-                log.error("error message tye!");
+                log.error("error message type!");
                 break;
         }
+        ctx.writeAndFlush(new TextWebSocketFrame("ok."));
     }
 
     private void handleOnlineMsg(String name, Channel channel) throws UnknownHostException {

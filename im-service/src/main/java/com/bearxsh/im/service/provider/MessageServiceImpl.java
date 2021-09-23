@@ -19,11 +19,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Slf4j
 public class MessageServiceImpl implements MessageService {
 
-
     @Autowired
     private RedisTemplate redisTemplate;
+
     @DubboReference(parameters = {"router","address"})
     private SendMessageService sendMessageService;
+
     @Override
     public void handleSendMsg(Message message) {
         // TODO 消息入库
@@ -37,7 +38,7 @@ public class MessageServiceImpl implements MessageService {
         }
         log.info("destination: {}", gatewayAddr);
         String[] addr = gatewayAddr.split(":");
-        Address address = new Address(addr[0], Integer.valueOf(addr[1]));
+        Address address = new Address(addr[0], Integer.parseInt(addr[1]));
         RpcContext.getContext().setObjectAttachment("address", address);
         sendMessageService.senMessage(to, data);
 
